@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: eventing.svc01
+  task:
+    scheduling:
+      pool:
+        size: 10
+server:
+  port: 8080
+appConfig:
+  inFileNames:
+    file001: /Users/biswajitmaji/biswajit/code/springboot/test-files/infile001.txt
+    file002: /Users/biswajitmaji/biswajit/code/springboot/test-files/infile002.txt
+  outFileNames:
+    file001: /Users/biswajitmaji/biswajit/code/springboot/test-files/outfile001.txt
+    file002: /Users/biswajitmaji/biswajit/code/springboot/test-files/outfile002.txt
+kafka:
+  producers:
+    producer001:
+      bootstrap-servers: localhost:9092
+      topic: bmtopic001
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 3
+      acks: all
+      linger.ms: 5
+      batch.size: 16384
+      buffer.memory: 33554432
+    producer002:
+      bootstrap-servers: localhost:9092
+      topic: bmtopic002
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 3
+      acks: all
+      linger.ms: 5
+      batch.size: 16384
+      buffer.memory: 33554432
+  consumers:
+    consumer001:
+      bootstrap-servers: localhost:9092
+      topic: bmtopic001
+      group-id: bmgroup001
+      keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: latest
+      enable-auto-commit: true
+    consumer002:
+      bootstrap-servers: localhost:9092
+      topic: bmtopic002
+      group-id: bmgroup002
+      keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: latest
+      enable-auto-commit: true
